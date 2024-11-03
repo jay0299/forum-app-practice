@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react';
 import * as S from './styles/Table.styled.js';
 import { Button } from './Button.js';
 import { PageHeader } from './PageHeader.js';
+import { useNavigate } from 'react-router-dom';
 
 export const Table = () => {
+  const navigate = useNavigate();
   const [details, setDetails] = useState([
     // FIXME: 빈 배열로 수정
     {
@@ -31,6 +33,10 @@ export const Table = () => {
     // fetch('API url').then((res)=> setDetails((current) => res.data)).catch(error=> console.log(error));
   }, []);
 
+  const handleButtonClick = () => {
+    navigate('/posts');
+  };
+
   return (
     <S.Container>
       <PageHeader text={'게시글 목록'}></PageHeader>
@@ -50,7 +56,7 @@ export const Table = () => {
           </tr>
         ))}
       </S.Table>
-      <Button text="글쓰기" />
+      <Button text="글쓰기" onClick={handleButtonClick} />
     </S.Container>
   );
 };
