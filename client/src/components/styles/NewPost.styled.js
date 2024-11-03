@@ -4,12 +4,6 @@ export const Container = styled.div`
   padding: 0 300px;
 `;
 
-export const Header = styled.h1`
-  text-align: left;
-  border-bottom: 2px solid black;
-  padding-bottom: 12px;
-`;
-
 export const FormContainer = styled.div`
   display: flex;
   flex-direction: column;

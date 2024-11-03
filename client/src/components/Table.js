@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import * as S from './styles/Table.styled.js';
+import { Button } from './Button.js';
+import { PageHeader } from './PageHeader.js';
 
 export const Table = () => {
   const [details, setDetails] = useState([
@@ -30,21 +32,25 @@ export const Table = () => {
   }, []);
 
   return (
-    <S.Table>
-      <S.TableHeader>
-        <th>번호</th>
-        <th>제목</th>
-        <th>작성자</th>
-        <th>작성일</th>
-      </S.TableHeader>
-      {details.map((detail) => (
-        <tr>
-          <S.TableData>{detail.postId}</S.TableData>
-          <S.TableData>{detail.title}</S.TableData>
-          <S.TableData>{detail.author}</S.TableData>
-          <S.TableData>{detail.date}</S.TableData>
-        </tr>
-      ))}
-    </S.Table>
+    <S.Container>
+      <PageHeader text={'게시글 목록'}></PageHeader>
+      <S.Table>
+        <S.TableHeader>
+          <th>번호</th>
+          <th>제목</th>
+          <th>작성자</th>
+          <th>작성일</th>
+        </S.TableHeader>
+        {details.map((detail) => (
+          <tr>
+            <S.TableData>{detail.postId}</S.TableData>
+            <S.TableData>{detail.title}</S.TableData>
+            <S.TableData>{detail.author}</S.TableData>
+            <S.TableData>{detail.date}</S.TableData>
+          </tr>
+        ))}
+      </S.Table>
+      <Button text="글쓰기" />
+    </S.Container>
   );
 };

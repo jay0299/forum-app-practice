@@ -1,11 +1,16 @@
 import styled from 'styled-components';
 
+export const Container = styled.div`
+  padding: 0 300px;
+`;
+
 export const Table = styled.table`
   border: 1px solid black;
   border-collapse: collapse;
   margin: auto;
-  width: 80%;
+  width: 100%;
   font-size: 20px;
+  text-align: center;
 `;
 
 export const TableHeader = styled.tr`
