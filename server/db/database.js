@@ -12,7 +12,7 @@ export const sequelize = new Sequelize(
 );
 
 // Post 모델
-class Post extends Model {}
+export class Post extends Model {}
 
 Post.init(
   {
