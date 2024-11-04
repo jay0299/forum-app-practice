@@ -1,36 +1,23 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import * as S from './styles/Table.styled.js';
 import { Button } from './Button.js';
 import { PageHeader } from './PageHeader.js';
-import { useNavigate } from 'react-router-dom';
 
 export const Table = () => {
   const navigate = useNavigate();
-  const [details, setDetails] = useState([
-    // FIXME: 빈 배열로 수정
-    {
-      postId: 1,
-      title: '테스트 포스트1',
-      author: '개발자1',
-      date: '2024.11.01.',
-    },
-    {
-      postId: 2,
-      title: '테스트 포스트22',
-      author: '개발자2',
-      date: '2024.11.01.',
-    },
-    {
-      postId: 3,
-      title: '테스트 포스트333',
-      author: '개발자3',
-      date: '2024.11.01.',
-    },
-  ]);
+  const [details, setDetails] = useState([]);
 
   useEffect(() => {
-    // TODO: API Request (GET /api/posts)
-    // fetch('API url').then((res)=> setDetails((current) => res.data)).catch(error=> console.log(error));
+    axios
+      .get('http://localhost:5000/posts')
+      .then((res) => {
+        setDetails(res.data);
+      })
+      .catch((err) => console.log(err));
+
+    // FIXME: details의 createdAt 포맷을 연월일만 포함되도록 수정
   }, []);
 
   const handleButtonClick = () => {
@@ -49,10 +36,10 @@ export const Table = () => {
         </S.TableHeader>
         {details.map((detail) => (
           <tr>
-            <S.TableData>{detail.postId}</S.TableData>
+            <S.TableData>{detail.id}</S.TableData>
             <S.TableData>{detail.title}</S.TableData>
             <S.TableData>{detail.author}</S.TableData>
-            <S.TableData>{detail.date}</S.TableData>
+            <S.TableData>{detail.createdAt}</S.TableData>
           </tr>
         ))}
       </S.Table>

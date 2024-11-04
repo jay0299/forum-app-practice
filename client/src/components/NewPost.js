@@ -1,20 +1,72 @@
+import axios from 'axios';
 import { Button } from './Button.js';
 import { PageHeader } from './PageHeader.js';
 import * as S from './styles/NewPost.styled.js';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const NewPost = () => {
+  const [postDetails, setPostDetails] = useState({
+    title: '',
+    content: '',
+    // author: '', FIXME: auth 기능 구현 후 주석 해제
+  });
+  const navigate = useNavigate();
+
+  const onChange = (event) => {
+    const { value, name } = event.target;
+    setPostDetails({
+      ...postDetails,
+      [name]: value,
+    });
+  };
+
+  const handleButtonClick = () => {
+    axios
+      .post(
+        'http://localhost:5000/posts',
+        {
+          title: postDetails.title,
+          content: postDetails.content,
+          // FIXME: auth 기능 구현 후 author 정보 추가
+        },
+        {
+          headers: {
+            'Content-type': 'application/json',
+            Accept: 'application/json',
+          },
+        }
+      )
+      .then(() => {
+        alert('게시글을 작성했습니다.');
+        navigate('/');
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <S.Container>
       <PageHeader text={'게시판 글쓰기'}></PageHeader>
       <S.FormContainer>
         <S.Form>
-          <S.Title placeholder="제목을 입력해주세요" />
-          <S.Content rows={20} cols={100}>
-            hi
-          </S.Content>
+          <S.Title
+            type="text"
+            name="title"
+            value={postDetails.title}
+            onChange={onChange}
+            placeholder="제목을 입력해주세요"
+          />
+          <S.Content
+            rows={20}
+            cols={100}
+            name="content"
+            value={postDetails.content}
+            onChange={onChange}
+            placeholder="내용을 입력해주세요"
+          ></S.Content>
         </S.Form>
       </S.FormContainer>
-      <Button text={'작성'} />
+      <Button text={'작성'} onClick={handleButtonClick} />
     </S.Container>
   );
 };
