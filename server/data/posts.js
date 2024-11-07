@@ -9,3 +9,8 @@ export const create = async (title, content) => {
   const result = await Post.create({ title, content, author: 'TESTER' }); // FIXME: auth 기능 구현 후 author 관련 부분 수정
   return result.dataValues;
 };
+
+export const getPost = async (postId) => {
+  const result = await Post.findByPk(postId);
+  return result.dataValues;
+};

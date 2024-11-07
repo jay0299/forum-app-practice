@@ -6,5 +6,7 @@ const router = express.Router();
 router.get('/', postsRepository.getAllPosts);
 // POST /posts
 router.post('/', postsRepository.uploadPost);
+// GET /posts/:id
+router.get('/:id', postsRepository.getPostDetail);
 
 export default router;

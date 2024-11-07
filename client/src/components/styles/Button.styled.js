@@ -10,4 +10,5 @@ export const Button = styled.button`
   padding: 8px 16px;
   position: relative;
   left: 365px;
+  cursor: pointer;
 `;

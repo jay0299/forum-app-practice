@@ -24,6 +24,11 @@ export const Table = () => {
     navigate('/posts');
   };
 
+  const handlePostClick = (event) => {
+    const targetPostId = event.target.parentElement.firstChild.innerHTML;
+    navigate(`/posts/${targetPostId}`);
+  };
+
   return (
     <S.Container>
       <PageHeader text={'게시글 목록'}></PageHeader>
@@ -37,9 +42,14 @@ export const Table = () => {
         {details.map((detail) => (
           <tr>
             <S.TableData>{detail.id}</S.TableData>
-            <S.TableData>{detail.title}</S.TableData>
+            <S.TableData
+              onClick={handlePostClick}
+              style={{ cursor: 'pointer' }}
+            >
+              {detail.title}
+            </S.TableData>
             <S.TableData>{detail.author}</S.TableData>
-            <S.TableData>{detail.createdAt}</S.TableData>
+            <S.TableData>{detail.createdAt.slice(0, 10)}</S.TableData>
           </tr>
         ))}
       </S.Table>

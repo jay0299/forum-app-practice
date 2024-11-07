@@ -1,4 +1,4 @@
-import { create, getAll } from '../data/posts.js';
+import { create, getAll, getPost } from '../data/posts.js';
 
 export const getAllPosts = async (req, res, next) => {
   const result = await getAll();
@@ -16,4 +16,14 @@ export const uploadPost = async (req, res, next) => {
 
   const result = await create(title, content);
   res.status(201).json(result);
+};
+
+export const getPostDetail = async (req, res, next) => {
+  const postId = req.params.id;
+  if (!postId) {
+    return res.status(400).json({ message: 'Post ID is missing!' });
+  }
+
+  const result = await getPost(postId);
+  res.status(200).json(result);
 };
