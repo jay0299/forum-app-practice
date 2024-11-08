@@ -17,6 +17,22 @@ export const Post = () => {
     navigate('/');
   };
 
+  const handleUpdateButtonClick = () => {
+    navigate('/posts', {
+      state: { id: id, title: detail.title, content: detail.content },
+    });
+  };
+
+  const handleDeleteButtonClick = () => {
+    axios
+      .delete(`http://localhost:5000/posts/${id}`)
+      .then(() => {
+        alert('게시글을 삭제했습니다.');
+        navigate('/');
+      })
+      .catch((err) => console.log(err));
+  };
+
   useEffect(() => {
     axios
       .get(`http://localhost:5000/posts/${id}`)
@@ -45,6 +61,10 @@ export const Post = () => {
       <section>
         <p>{detail.content}</p>
       </section>
+      <S.ButtonContainer>
+        <Button text={'수정'} onClick={handleUpdateButtonClick} />
+        <Button text={'삭제'} onClick={handleDeleteButtonClick} />
+      </S.ButtonContainer>
       <Button text={'목록으로'} onClick={handleButtonClick} />
 
       {/* 

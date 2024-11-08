@@ -12,3 +12,8 @@ export const PostDetail = styled.div`
   padding-bottom: 12px;
   border-bottom: 2px solid black;
 `;
+
+export const ButtonContainer = styled.div`
+  position: relative;
+  left: 300px;
+`;

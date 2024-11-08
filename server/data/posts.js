@@ -14,3 +14,14 @@ export const getPost = async (postId) => {
   const result = await Post.findByPk(postId);
   return result.dataValues;
 };
+
+export const updatePost = async (postId, title, content) => {
+  await Post.update({ title, content }, { where: { id: postId } });
+  const updated = await getPost(postId);
+  return updated;
+};
+
+export const deletePost = async (postId) => {
+  // FIXME: 아이디 밀림 현상 수정
+  await Post.destroy({ where: { id: postId } });
+};
